@@ -19,35 +19,29 @@ from PIL import Image
 from models.research.object_detection.utils import dataset_util
 from collections import namedtuple, OrderedDict
 
-# ! Path to images
-img_path = './data/img/'
+# ######################################
+# ! Setup params
+img_path = './data/img/uvasi/'
+csv_input = './data/csv/example_annotation.csv'
+tfRecord_output = './data/record/example_annotation.record'
+labels = ['A', 'B', 'triangle', 'rectangle']
+# ######################################
 
 flags = tf.app.flags
 # ! Path to input CSV
-flags.DEFINE_string('csv_input', '', './data/csv/train_annotation.csv')
+flags.DEFINE_string('csv_input', '', csv_input)
 # ! Path to output TFRecord
-flags.DEFINE_string('output_path', '', './data/record/train_annotation.record')
+flags.DEFINE_string('output_path', '', tfRecord_output)
 FLAGS = flags.FLAGS
 
 
 # ! TO-DO replace this with label map
 def class_text_to_int(row_label):
-    if row_label == 'A':
-        return 1
-    else:
-        None
-    if row_label == 'B':
-        return 1
-    else:
-        None
-    if row_label == 'triangle':
-        return 1
-    else:
-        None
-    if row_label == 'rectangle':
-        return 1
-    else:
-        None
+    for label in labels:
+        if row_label == label:
+            return labels.index(label)
+        else:
+            None
 
 
 def split(df, group):

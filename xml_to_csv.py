@@ -26,12 +26,12 @@ def xml_to_csv(path):
 
 
 def main():
+    csv_path = './data/csv/uavsi_annotation.csv'
+    xml_path = os.path.join(os.getcwd(), './data/xml/uavsi')
     #image_path = os.path.join(os.getcwd(), './data/img/'.format(directory))
-    xml_path = os.path.join(os.getcwd(), './data/xml/')
     #xml_df = xml_to_csv(image_path)
     xml_df = xml_to_csv(xml_path)
-    xml_df.to_csv('./data/csv/train_annotation.csv', index=None)
+    xml_df.to_csv(csv_path, index=None)
     print('Successfully converted xml to csv.')
-
 
 main()
