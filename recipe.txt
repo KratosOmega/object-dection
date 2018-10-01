@@ -1,0 +1,5 @@
+$ python3 xml_to_csv.py
+- Convert xml to csv
+
+$ python3 generate_tfrecord.py --csv_input=data/csv/train_annotation.csv --output_path=data/record/train_annotation.record
+- Convert csv to TFRecord
