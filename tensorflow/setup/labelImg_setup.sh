@@ -1,6 +1,6 @@
 ########################################################
 #labelImg:
-cd ../labelImg
+cd ../../../labelImg
 sudo apt-get install pyqt5-dev-tools
 #sudo apt-get install python3-setuptools
 #sudo pip3 install --user pyqt5
