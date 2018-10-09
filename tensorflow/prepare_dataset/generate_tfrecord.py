@@ -19,24 +19,27 @@ from PIL import Image
 from object_detection.utils import dataset_util
 from collections import namedtuple, OrderedDict
 
-# ######################################
+# ########################################################################################################################################################
 # ! Setup params
-labels = ['A', 'B', 'triangle', 'rectangle']
+# ! NOTE: labels need to be corresponding match the ../src/auvsi.pbtxt
+labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+          '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+          'circle', 'semicircle', 'quartercircle', 'triangle', 'square', 'rectangle', 'trapezoid', 'pentagon', 'hexagon', 'heptagon', 'octagon', 'star', 'cross']
 
-"""
+
 # --- Train
-img_path = './data/img/uvasi/train/'
-csv_input = './data/csv/uavsi_train_annotation.csv'
-tfRecord_output = './data/record/uavsi_train_annotation.record'
+img_path = '../../../data/img/auvsi/train/'
+csv_input = '../../../data/csv/auvsi_train_annotation.csv'
+tfRecord_output = '../../../data/record/auvsi_train_annotation.record'
 """
 
 # --- Test
-img_path = './data/img/uvasi/test/'
-csv_input = './data/csv/uavsi_test_annotation.csv'
-tfRecord_output = './data/record/uavsi_test_annotation.record'
+img_path = '../../../data/img/auvsi/test/'
+csv_input = '../../../data/csv/auvsi_test_annotation.csv'
+tfRecord_output = '../../../data/record/auvsi_test_annotation.record'
+"""
 
-
-# ######################################
+# ########################################################################################################################################################
 
 flags = tf.app.flags
 # ! Path to input CSV
@@ -50,7 +53,7 @@ FLAGS = flags.FLAGS
 def class_text_to_int(row_label):
     for label in labels:
         if row_label == label:
-            return labels.index(label)
+            return labels.index(label) + 1 # CUSTOM_CONFIGURED
         else:
             None
 
@@ -104,13 +107,12 @@ def create_tf_example(group, path):
 
 def main(_):
     writer = tf.python_io.TFRecordWriter(FLAGS.output_path)
-    path = os.path.join(os.getcwd(), img_path)
+    path = os.path.abspath(os.path.join(os.getcwd(), img_path))
     examples = pd.read_csv(FLAGS.csv_input)
     grouped = split(examples, 'filename')
     for group in grouped:
         tf_example = create_tf_example(group, path)
         writer.write(tf_example.SerializeToString())
-
     writer.close()
     output_path = os.path.join(os.getcwd(), FLAGS.output_path)
     print('Successfully created the TFRecords: {}'.format(output_path))

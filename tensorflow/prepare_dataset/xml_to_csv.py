@@ -28,15 +28,15 @@ def xml_to_csv(path):
 def main():
     """
     # --- Train
-    csv_path = './data/csv/uavsi_train_annotation.csv'
-    xml_path = os.path.join(os.getcwd(), './data/xml/uavsi/train/')
+    csv_path = '../../../data/csv/auvsi_train_annotation.csv'
+    xml_path = os.path.join(os.getcwd(), '../../../data/xml/auvsi/train/')
     xml_df = xml_to_csv(xml_path)
     xml_df.to_csv(csv_path, index=None)
 
     """
     # --- Test
-    csv_path = './data/csv/uavsi_test_annotation.csv'
-    xml_path = os.path.join(os.getcwd(), './data/xml/uavsi/test/')
+    csv_path = '../../../data/csv/auvsi_test_annotation.csv'
+    xml_path = os.path.join(os.getcwd(), '../../../data/xml/auvsi/test/')
     xml_df = xml_to_csv(xml_path)
     xml_df.to_csv(csv_path, index=None)
 
